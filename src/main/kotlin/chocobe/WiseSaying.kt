@@ -2,6 +2,12 @@ package chocobe
 
 data class WiseSaying(
     val id: Int,
-    val content: String,
-    val author: String
-)
+    var content: String,
+    var author: String
+) {
+    fun modify(newContent: String, newAuthor: String): WiseSaying {
+        this.content = newContent
+        this.author = newAuthor
+        return this
+    }
+}
