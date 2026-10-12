@@ -18,7 +18,7 @@ class App {
 
             val action = rq.actionName
 
-            when (input) {
+            when (action) {
 
                 "종료" -> break
                 "등록" -> {
@@ -44,8 +44,26 @@ class App {
                             println("${it.id} / ${it.content} / ${it.author}")
                         }
                 }
+
                 "삭제" -> {
-                    val id: Int = rq.getParamAsInt("id", 0)
+                    val id = rq.getParamAsInt("id", 0)
+
+                    if (id == 0) {
+                        println("올바른 id를 입력해주세요.")
+                        continue
+                    }
+
+                    val wiseSaying = wiseSayings.firstOrNull {
+                        it.id == id
+                    }
+
+                    if (wiseSaying == null) {
+                        println("${id}번 명언은 존재하지 않습니다.")
+                        continue
+                    }
+
+                    wiseSayings.remove(wiseSaying)
+                    println("${id}번 명언이 삭제되었습니다.")
                 }
 
                 else -> continue
