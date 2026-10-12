@@ -1,9 +1,12 @@
 package chocobe
 
+import kotlin.apply
+
 class App {
 
     fun run() {
         var lastId = 0
+        val wiseSayings = mutableListOf<WiseSaying>()
 
         println("== 명언 앱 ==")
 
@@ -20,7 +23,21 @@ class App {
                     val author = readln()
 
                     val id = ++lastId
-                    println("${id}번 명언이 등록되었습니다.")
+                    val wiseSaying = WiseSaying(id, content, author).also {
+                        wiseSayings.add(it)
+                    }
+
+                    println("${wiseSaying.id}번 명언이 등록되었습니다.")
+                }
+
+                "목록" -> {
+                    println("번호 / 명언 / 작가")
+                    println("--------------------------------------------------")
+                    wiseSayings
+                        .reversed()
+                        .forEach {
+                            println("${it.id} / ${it.content} / ${it.author}")
+                        }
                 }
 
                 else -> continue
