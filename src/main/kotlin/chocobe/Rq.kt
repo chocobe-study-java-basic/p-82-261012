@@ -1,6 +1,6 @@
 package chocobe
 
-class Rg(
+class Rq(
     val cmd: String
 ) {
 
