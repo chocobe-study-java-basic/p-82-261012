@@ -1,7 +1,7 @@
 package chocobe
 
 class Rg(
-    cmd: String
+    val cmd: String
 ) {
 
     val actionName: String
@@ -24,4 +24,11 @@ class Rg(
         }
     }
 
+    fun getParam(key: String, defaultValue: String): String {
+        return paramMap[key] ?: defaultValue
+    }
+
+    fun getParamAsInt(key: String, defaultValue: Int): Int {
+        return paramMap[key]?.toIntOrNull() ?: defaultValue
+    }
 }

@@ -14,10 +14,11 @@ class App {
             print("명령) ")
             val input = readln();
 
-            when (input) {
-                val rq = Rg(input)
+            val rq = Rg(input)
 
-                val action = rq.actionName
+            val action = rq.actionName
+
+            when (input) {
 
                 "종료" -> break
                 "등록" -> {
