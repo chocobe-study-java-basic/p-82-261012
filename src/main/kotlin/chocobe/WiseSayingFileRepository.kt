@@ -16,7 +16,7 @@ class WiseSayingFileRepository : WiseSayingRepository {
         return wiseSaying
             .takeIf { it.isNew() }
             ?.also {
-                wiseSaying.id = ++lastId
+                wiseSaying.id = genNextId()
                 saveOnDisk(wiseSaying)
             } ?: wiseSaying
     }
@@ -36,6 +36,12 @@ class WiseSayingFileRepository : WiseSayingRepository {
                 .readText()
                 .toInt()
         }.getOrElse { 0 }
+    }
+
+    fun genNextId(): Int {
+        return (loadLastId() + 1).also {
+            saveLastId(it)
+        }
     }
 
     override fun findListDesc(): List<WiseSaying> {
