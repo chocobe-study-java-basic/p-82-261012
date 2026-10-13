@@ -10,7 +10,7 @@ class WiseSayingControllerTest {
 
     @BeforeTest
     fun tearDown() {
-        SingletonScope.wiseSayingRepository.clear()
+        SingletonScope.wiseSayingMemoryRepository.clear()
     }
 
     @Test
