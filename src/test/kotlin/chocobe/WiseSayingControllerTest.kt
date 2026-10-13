@@ -1,10 +1,17 @@
 package chocobe
 
+import chocobe.global.bean.SingletonScope
 import org.assertj.core.api.Assertions.assertThat
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertContains
 
 class WiseSayingControllerTest {
+
+    @BeforeTest
+    fun tearDown() {
+        SingletonScope.wiseSayingRepository.clear()
+    }
 
     @Test
     fun `명언 작성~`() {

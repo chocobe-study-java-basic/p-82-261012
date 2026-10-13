@@ -1,9 +1,10 @@
 package chocobe
 
+import chocobe.global.bean.SingletonScope
 import chocobe.global.rq.Rq
 
 class WiseSayingController(
-    val wiseSayingService: WiseSayingService = WiseSayingService()
+    val wiseSayingService: WiseSayingService = SingletonScope.wiseSayingService
 ) {
 
     var lastId = 0

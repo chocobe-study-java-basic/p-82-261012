@@ -1,7 +1,9 @@
 package chocobe
 
+import chocobe.global.bean.SingletonScope
+
 class WiseSayingService(
-    val wiseSayingRepository: WiseSayingRepository = WiseSayingRepository()
+    val wiseSayingRepository: WiseSayingRepository = SingletonScope.wiseSayingRepository
 ) {
 
     fun add(content: String, author: String): WiseSaying = WiseSaying(
