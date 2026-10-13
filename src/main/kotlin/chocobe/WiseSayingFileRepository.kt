@@ -21,6 +21,23 @@ class WiseSayingFileRepository : WiseSayingRepository {
             } ?: wiseSaying
     }
 
+    fun saveLastId(lastId: Int) {
+        mkTableDirsIfNotExists()
+
+        tableDirPath.resolve("lastId.txt")
+            .toFile()
+            .writeText(lastId.toString())
+    }
+
+    fun loadLastId(): Int {
+        return kotlin.runCatching {
+            tableDirPath.resolve("lastId.txt")
+                .toFile()
+                .readText()
+                .toInt()
+        }.getOrElse { 0 }
+    }
+
     override fun findListDesc(): List<WiseSaying> {
         TODO("Not yet implemented")
     }
