@@ -41,6 +41,19 @@ class WiseSayingMemoryRepository : WiseSayingRepository {
         return listOf()
     }
 
+    override fun findByKeywordPaged(
+        keywordType: String,
+        keyword: String,
+        itemsPerPage: Int,
+        pageNo: Int
+    ): Page<WiseSaying> {
+        TODO("Not yet implemented")
+    }
+
+    override fun findAllPaged(itemsPerPage: Int, pageNo: Int): Page<WiseSaying> {
+        TODO("Not yet implemented")
+    }
+
     override
     fun delete(wiseSaying: WiseSaying) = wiseSayings.remove(wiseSaying)
 

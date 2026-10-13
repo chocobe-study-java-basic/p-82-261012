@@ -23,15 +23,17 @@ class WiseSayingController(
         println("${wiseSaying.id}번 명언이 등록되었습니다.")
     }
 
-    fun list(rq: Rq)  {
+    fun list(rq: Rq) {
         val keywordType = rq.getParam("keywordType", "content")
         val keyword = rq.getParam("keyword", "")
 
-        val wiseSayings = if (keyword.isNotBlank())
-            wiseSayingService.findByKeyword(keywordType, keyword)
-        else
-            wiseSayingService.findListDesc()
+        val itemsPerPage = 5
+        val pageNo: Int = rq.getParamAsInt("page", 1)
 
+        val wiseSayingPage = if (keyword.isNotBlank())
+            wiseSayingService.findByKeywordPaged(keywordType, keyword, itemsPerPage, pageNo)
+        else
+            wiseSayingService.findAllPaged(itemsPerPage, pageNo)
         if (keyword.isNotBlank()) {
             println("----------------------")
             println("검색타입 : $keywordType")
@@ -42,9 +44,18 @@ class WiseSayingController(
         println("번호 / 작가 / 명언")
         println("----------------------")
 
-        wiseSayings.forEach {
+        wiseSayingPage.content.forEach {
             println("${it.id} / ${it.author} / ${it.content}")
         }
+
+        print("페이지 : ")
+
+        val pageMenu = (1..wiseSayingPage.totalPages)
+            .joinToString(" ") {
+                if (it == pageNo) "[$it]" else it.toString()
+            }
+
+        println(pageMenu)
     }
 
     fun delete(rq: Rq) {
