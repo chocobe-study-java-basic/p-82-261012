@@ -1,5 +1,7 @@
 package chocobe
 
+import chocobe.global.rq.Rq
+
 class App(
     val wiseSayingController: WiseSayingController = WiseSayingController(),
     val systemController: SystemController = SystemController()

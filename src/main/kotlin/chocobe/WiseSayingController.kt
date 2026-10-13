@@ -1,5 +1,7 @@
 package chocobe
 
+import chocobe.global.rq.Rq
+
 class WiseSayingController(
     val wiseSayingService: WiseSayingService = WiseSayingService()
 ) {

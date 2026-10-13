@@ -1,4 +1,4 @@
-package chocobe
+package chocobe.global.rq
 
 class Rq(
     val cmd: String
