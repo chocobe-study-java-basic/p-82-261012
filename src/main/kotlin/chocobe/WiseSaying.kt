@@ -1,5 +1,7 @@
 package chocobe
 
+import chocobe.global.utils.JsonUtil
+
 data class WiseSaying(
     var id: Int,
     var content: String,
@@ -27,4 +29,16 @@ data class WiseSaying(
                 }
             """.trimIndent()
         }
+
+    companion object {
+        fun fromJsonStr(jsonStr: String): WiseSaying {
+            val map = JsonUtil.jsonStrToMap(jsonStr)
+
+            return WiseSaying(
+                id = map["id"] as Int,
+                content = map["content"] as String,
+                author = map["author"] as String,
+            )
+        }
+    }
 }
