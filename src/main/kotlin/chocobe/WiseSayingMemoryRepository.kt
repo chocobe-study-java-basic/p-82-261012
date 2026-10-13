@@ -29,6 +29,18 @@ class WiseSayingMemoryRepository : WiseSayingRepository {
     override
     fun findById(id: Int): WiseSaying? = wiseSayings.firstOrNull { it.id == id }
 
+    override fun findByAuthorLike(keyword: String): List<WiseSaying> {
+        return listOf()
+    }
+
+    override fun findByContentLike(contentLike: String): List<WiseSaying> {
+        TODO("Not yet implemented")
+    }
+
+    override fun findByAuthorContent(keyword: String): List<WiseSaying> {
+        return listOf()
+    }
+
     override
     fun delete(wiseSaying: WiseSaying) = wiseSayings.remove(wiseSaying)
 

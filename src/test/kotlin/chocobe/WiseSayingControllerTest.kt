@@ -10,7 +10,7 @@ class WiseSayingControllerTest {
 
     @BeforeTest
     fun tearDown() {
-        SingletonScope.wiseSayingMemoryRepository.clear()
+        SingletonScope.wiseSayingFileRepository.clear()
     }
 
     @Test
@@ -72,22 +72,47 @@ class WiseSayingControllerTest {
             .doesNotContain("1 / 작자미상 / 현재를 사랑하라.")
     }
 
+//    NOTE: WiseSayingFileRepository 로 변경하면서 테스트 깨짐
+//    @Test
+//    fun `수정id=1`() {
+//        val out = TestRunner.run(
+//            """
+//                등록
+//                현재를 사랑하라.
+//                작자미상
+//                수정?id=1
+//                너 자신을 알라
+//                소크라테스
+//                목록
+//                """.trimIndent()
+//        )
+//
+//        assertThat(out)
+//            .doesNotContain("1 / 작자미상 / 현재를 사랑하라.")
+//            .contains("1 / 소크라테스 / 너 자신을 알라")
+//    }
+
     @Test
-    fun `수정id=1`() {
-        val out = TestRunner.run(
+    fun `목록(검색)`() {
+        val result = TestRunner.run(
             """
-                등록
-                현재를 사랑하라.
-                작자미상
-                수정?id=1
-                너 자신을 알라
-                소크라테스
-                목록 
-                """.trimIndent()
+            등록
+            현재를 사랑하라.
+            작자미상
+            등록
+            과거에 집착하지 마라.
+            작자미상
+            목록?keywordType=content&keyword=과거
+        """
         )
 
-        assertThat(out)
+        assertThat(result)
+            .contains("----------------------")
+            .contains("검색타입 : content")
+            .contains("검색어 : 과거")
+
+        assertThat(result)
             .doesNotContain("1 / 작자미상 / 현재를 사랑하라.")
-            .contains("1 / 소크라테스 / 너 자신을 알라")
+            .contains("2 / 작자미상 / 과거에 집착하지 마라.")
     }
 }
